@@ -1,0 +1,1 @@
+export const GET_THEATER_SYSTEM = "GET_THEATER_SYSTEM";

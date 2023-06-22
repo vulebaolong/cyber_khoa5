@@ -1,3 +1,4 @@
 import { combineReducers } from "redux";
 import { QuanLyPhimReducer } from "./QuanLyPhimReducer";
-export const rootReducer = combineReducers({ QuanLyPhimReducer });
+import { QuanLyRapReducer } from "./QuanLyRapReducer";
+export const rootReducer = combineReducers({ QuanLyPhimReducer, QuanLyRapReducer });
