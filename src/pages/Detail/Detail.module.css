@@ -1,0 +1,30 @@
+.backGroundDetail {
+    position: relative;
+    z-index: 1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 96px;
+}
+
+.backGroundDetail::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 2;
+    background: linear-gradient(
+        0deg,
+        rgba(15, 23, 42, 1) 0%,
+        rgba(15, 23, 42, 0.9) 10%,
+        rgba(15, 23, 42, 0.8) 20%,
+        rgba(15, 23, 42, 0.7) 30%,
+        rgba(15, 23, 42, 0.6) 40%,
+        rgba(15, 23, 42, 0.5) 50%,
+        rgba(15, 23, 42, 0) 100%
+    );
+}

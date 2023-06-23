@@ -6,6 +6,9 @@ class QuanLyPhim extends BaseApi {
     getListFilms = () => {
         return this.get(`/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`);
     };
+    getOneFilm = (data) => {
+        return this.get(`/QuanLyPhim/LayThongTinPhim?MaPhim=${data}`);
+    };
 }
 
 export const quanLyPhim = new QuanLyPhim();

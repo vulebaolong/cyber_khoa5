@@ -2,6 +2,7 @@ import { vlbl } from "vlbl";
 import {
     GET_LIST_BANNERS,
     GET_LIST_FILMS,
+    GET_ONE_FILM,
     GET_PHIM_DANG_CHIEU,
     GET_PHIM_SAP_CHIEU,
     GET_TAT_CA_PHIM,
@@ -11,6 +12,7 @@ const initialState = {
     listBanners: [],
     listFilms: [],
     listFilmsDisplay: [],
+    oneFilm: {},
 };
 
 export const QuanLyPhimReducer = (state = initialState, { type, payload }) => {
@@ -25,6 +27,12 @@ export const QuanLyPhimReducer = (state = initialState, { type, payload }) => {
             const copyState = vlbl.copy(state);
             copyState.listFilms = payload;
             return { ...state, listFilms: copyState.listFilms };
+        }
+
+        case GET_ONE_FILM: {
+            const copyState = vlbl.copy(state);
+            copyState.oneFilm = payload;
+            return { ...state, oneFilm: copyState.oneFilm };
         }
 
         case GET_TAT_CA_PHIM: {

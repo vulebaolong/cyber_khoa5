@@ -2,6 +2,8 @@
 // https://tailblocks.cc/
 // https://mambaui.com/
 // https://react-slick.neostack.com/
+// https://movie-booking-project.vercel.app/
+// https://mellow-stroopwafel-86c9e7.netlify.app/
 
 import axios from "axios";
 

@@ -1,4 +1,5 @@
 import { Typography } from "antd";
+import { NavLink } from "react-router-dom";
 
 const { Paragraph, Text } = Typography;
 
@@ -31,7 +32,10 @@ function Film(props) {
                 >
                     {film.moTa}
                 </Paragraph>
-                <a className="text-blue-400 inline-flex items-center">
+                <NavLink
+                    to={`/detail/${film.maPhim}`}
+                    className="text-blue-400 inline-flex items-center"
+                >
                     Đặt vé
                     <svg
                         className="w-4 h-4 ml-2"
@@ -45,7 +49,7 @@ function Film(props) {
                         <path d="M5 12h14" />
                         <path d="M12 5l7 7-7 7" />
                     </svg>
-                </a>
+                </NavLink>
             </div>
         </div>
     );

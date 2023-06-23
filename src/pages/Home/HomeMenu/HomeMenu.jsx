@@ -1,15 +1,13 @@
+import moment from "moment";
 import { Radio, Space, Tabs, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTheaterSystem } from "../../../redux/actions/QuanLyRapAction";
+import { NavLink } from "react-router-dom";
 
 function HomeMenu() {
     const dispatch = useDispatch();
     const { theaterSystem } = useSelector((state) => state.QuanLyRapReducer);
-    console.log(theaterSystem);
-    const changeTabPosition = (e) => {
-        setTabPosition(e.target.value);
-    };
 
     useEffect(() => {
         dispatch(getTheaterSystem());
@@ -19,24 +17,51 @@ function HomeMenu() {
         return text.length > length ? text.slice(0, length) + "..." : text;
     };
 
-    const renderDanhSachPhim = (danhSachPhim) => {
-        console.log("đấy", danhSachPhim.length);
+    const renderDanhSachPhim = (danhSachPhim, diaChi) => {
         const limit = danhSachPhim.length - 1;
-        return (
-            <div className="space-y-4">
-                {danhSachPhim.map((phim, index) => {
-                    return (
-                        <>
-                            <div className="" key={index}>
-                                <div className="flex w-14 items-center">
-                                    <img className="w-full" src={phim.hinhAnh} />
+        const contentLichChieu = (phim) => {
+            return phim.lstLichChieuTheoPhim.map((item, index) => {
+                const time = moment(item.ngayChieuGioChieu).format("hh:MM A");
+                return (
+                    <NavLink to="/" key={index}>
+                        <Tag color="green" style={{ margin: 0 }}>
+                            {time}
+                        </Tag>
+                    </NavLink>
+                );
+            });
+        };
+        const contentPhim = () =>
+            danhSachPhim.map((phim, index) => {
+                return (
+                    <div key={index}>
+                        <div className="space-y-3">
+                            <div className="flex gap-2">
+                                <div
+                                    className="flex w-16 h-16 items-center bg-cover bg-no-repeat bg-center"
+                                    style={{
+                                        backgroundImage: `url('${phim.hinhAnh}'), url('https://picsum.photos/64')`,
+                                    }}
+                                ></div>
+                                <div className="flex flex-col justify-between">
+                                    <strong className="text-lg">{phim.tenPhim}</strong>
+                                    <p className="m-0">{createText(diaChi, 40)}</p>
                                 </div>
-                                tenPhim: {phim.tenPhim}
                             </div>
-                            {index !== limit ? <hr className="opacity-25" /> : ""}
-                        </>
-                    );
-                })}
+                            <div className="flex gap-2">
+                                <div className="w-16"></div>
+                                <div className="grid grid-cols-6 gap-4">
+                                    {contentLichChieu(phim)}
+                                </div>
+                            </div>
+                        </div>
+                        {index !== limit ? <hr className="opacity-25" /> : ""}
+                    </div>
+                );
+            });
+        return (
+            <div className="space-y-4 overflow-auto " style={{ height: "465px" }}>
+                {contentPhim()}
             </div>
         );
     };
@@ -55,7 +80,7 @@ function HomeMenu() {
                 if (tenRap === "MegaGS") return "gold";
             };
             return (
-                <div className="flex gap-2">
+                <div className="flex gap-2 ">
                     <div className="flex w-14 items-center">
                         <img className="w-full" src={cumRap.hinhAnh} />
                     </div>
@@ -74,10 +99,10 @@ function HomeMenu() {
             return {
                 label: labelCumRap(cumRap),
                 key: index,
-                children: renderDanhSachPhim(cumRap.danhSachPhim),
+                children: renderDanhSachPhim(cumRap.danhSachPhim, cumRap.diaChi),
             };
         });
-        return <Tabs tabPosition="left" items={items} />;
+        return <Tabs tabPosition="left" items={items} style={{ height: "465px" }} />;
     };
 
     const renderRap = () => {
@@ -91,8 +116,8 @@ function HomeMenu() {
     };
 
     return (
-        <div className="container mx-auto">
-            <Tabs tabPosition="left" items={renderRap()} />
+        <div className="container mx-auto py-24">
+            <Tabs tabPosition="left" items={renderRap()} style={{ height: "465px" }} />
         </div>
     );
 }

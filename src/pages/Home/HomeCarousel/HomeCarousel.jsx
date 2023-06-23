@@ -36,6 +36,10 @@ function HomeCarousel() {
         });
     };
 
-    return <Carousel autoplay>{renderCarousel()}</Carousel>;
+    return (
+        <Carousel className="py-24" autoplay>
+            {renderCarousel()}
+        </Carousel>
+    );
 }
 export default HomeCarousel;

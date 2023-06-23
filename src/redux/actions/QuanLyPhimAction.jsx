@@ -3,12 +3,13 @@ import { quanLyPhim } from "../../Api/QuanLyPhimApi";
 import {
     GET_LIST_BANNERS,
     GET_LIST_FILMS,
+    GET_ONE_FILM,
     GET_PHIM_DANG_CHIEU,
     GET_PHIM_SAP_CHIEU,
     GET_TAT_CA_PHIM,
 } from "../constants/QuanLyPhimContants";
 
-export const getListBannerAction = (data) => {
+export const getListBannerAction = (requestData) => {
     return async (dispatch) => {
         try {
             const { data, status } = await quanLyPhim.getListBanner();
@@ -25,7 +26,7 @@ export const getListBannerAction = (data) => {
     };
 };
 
-export const getListFilmsAction = (data) => {
+export const getListFilmsAction = (requestData) => {
     return async (dispatch) => {
         try {
             const { data, status } = await quanLyPhim.getListFilms();
@@ -46,23 +47,40 @@ export const getListFilmsAction = (data) => {
     };
 };
 
-export const getTatCaPhim = (data) => {
+export const getTatCaPhimAction = (requestData) => {
     return {
         type: GET_TAT_CA_PHIM,
-        payload: data,
+        payload: requestData,
     };
 };
 
-export const getPhimDangChieu = (data) => {
+export const getPhimDangChieuAction = (requestData) => {
     return {
         type: GET_PHIM_DANG_CHIEU,
-        payload: data,
+        payload: requestData,
     };
 };
 
-export const getPhimSapChieu = (data) => {
+export const getPhimSapChieuAction = (requestData) => {
     return {
         type: GET_PHIM_SAP_CHIEU,
-        payload: data,
+        payload: requestData,
+    };
+};
+
+export const getOneFilmAction = (requestData) => {
+    return async (dispatch) => {
+        try {
+            const { data, status } = await quanLyPhim.getOneFilm(requestData);
+            console.log("getOneFilm", { data, status });
+            if (status !== STATE_CODE.SUCCESS) throw new Error(`status: ${status}`);
+
+            dispatch({
+                type: GET_ONE_FILM,
+                payload: data.content,
+            });
+        } catch (error) {
+            console.log(error);
+        }
     };
 };

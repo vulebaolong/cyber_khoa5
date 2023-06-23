@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     getListFilmsAction,
-    getPhimDangChieu,
-    getPhimSapChieu,
-    getTatCaPhim,
+    getPhimDangChieuAction,
+    getPhimSapChieuAction,
+    getTatCaPhimAction,
 } from "../../../redux/actions/QuanLyPhimAction";
 import Film from "../../../components/Film/Film";
 import Multipleitems from "../../../components/Rslick/Multipleitems";
@@ -25,13 +25,13 @@ function HomeFilms() {
 
     const handleOnchange = (e) => {
         if (e.target.value === "phimDangChieu") {
-            dispatch(getPhimDangChieu());
+            dispatch(getPhimDangChieuAction());
         }
         if (e.target.value === "phimSapChieu") {
-            dispatch(getPhimSapChieu());
+            dispatch(getPhimSapChieuAction());
         }
         if (e.target.value === "tatCaPhim") {
-            dispatch(getTatCaPhim());
+            dispatch(getTatCaPhimAction());
         }
     };
 
