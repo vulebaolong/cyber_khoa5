@@ -30,7 +30,7 @@ function Detail(props) {
             >
                 <DetailBanner infoFilm={infoFilm} />
             </div>
-            <div className="py-24 flex justify-center items-center">
+            <div className="py-24 container mx-auto">
                 <DetailTabs infoFilm={infoFilm} />
             </div>
         </>
