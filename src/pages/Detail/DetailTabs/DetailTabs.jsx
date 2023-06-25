@@ -37,7 +37,7 @@ function DetailTabs(props) {
                 if (tenRap === "MegaGS") return "gold";
             };
             return (
-                <div className="space-y-3">
+                <div className="space-y-3" key={index}>
                     <div className="flex gap-2 ">
                         <div className="flex w-14 items-center">
                             <img className="w-full" src={cumRap.hinhAnh} />
