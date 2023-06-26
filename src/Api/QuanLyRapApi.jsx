@@ -1,5 +1,5 @@
 import { BaseApi, GROUP_ID } from "./BaseApi";
-class QuanLyRap extends BaseApi {
+class QuanLyRapApi extends BaseApi {
     getTheaterSystem = () => {
         return this.get(`/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`);
     };
@@ -8,4 +8,4 @@ class QuanLyRap extends BaseApi {
     };
 }
 
-export const quanLyRap = new QuanLyRap();
+export const quanLyRapApi = new QuanLyRapApi();

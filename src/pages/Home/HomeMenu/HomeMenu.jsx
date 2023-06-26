@@ -2,15 +2,15 @@ import moment from "moment";
 import { Radio, Space, Tabs, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTheaterSystem } from "../../../redux/actions/QuanLyRapAction";
 import { NavLink } from "react-router-dom";
+import { getTheaterSystemAction } from "../../../redux/slices/QuanLyRapSlice";
 
 function HomeMenu() {
     const dispatch = useDispatch();
-    const { theaterSystem } = useSelector((state) => state.QuanLyRapReducer);
+    const { theaterSystem } = useSelector((state) => state.QuanLyRapSlice);
 
     useEffect(() => {
-        dispatch(getTheaterSystem());
+        dispatch(getTheaterSystemAction());
     }, []);
 
     const createText = (text, length) => {

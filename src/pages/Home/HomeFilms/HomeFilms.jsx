@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    getListFilmsAction,
-    getPhimDangChieuAction,
-    getPhimSapChieuAction,
-    getTatCaPhimAction,
-} from "../../../redux/actions/QuanLyPhimAction";
 import Film from "../../../components/Film/Film";
 import Multipleitems from "../../../components/Rslick/Multipleitems";
 import { Radio } from "antd";
+import { getListFilmsAction } from "../../../redux/slices/QuanLyPhimSlice";
 
 function HomeFilms() {
     const dispatch = useDispatch();
-    const { listFilmsDisplay } = useSelector((state) => state.QuanLyPhimReducer);
+    const { listFilmsDisplay } = useSelector((state) => state.QuanLyPhimSlice);
     useEffect(() => {
         dispatch(getListFilmsAction());
     }, []);

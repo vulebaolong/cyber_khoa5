@@ -2,7 +2,10 @@ import { Avatar, Steps } from "antd";
 const description = "This is a description.";
 function Header() {
     return (
-        <div className=" p-4 flex justify-between items-center">
+        <div
+            style={{ boxShadow: "0 0 15px rgba(255, 255, 255, 0.3)" }}
+            className=" p-4 flex justify-between items-center"
+        >
             <div className="">
                 <Steps
                     current={1}

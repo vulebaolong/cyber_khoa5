@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 function Footer() {
-    const { theaterSystem } = useSelector((state) => state.QuanLyRapReducer);
+    const { theaterSystem } = useSelector((state) => state.QuanLyRapSlice);
 
     const arrTheaterSystem = _.map(theaterSystem, (item) => {
         return _.pick(item, ["maHeThongRap", "tenHeThongRap", "logo"]);

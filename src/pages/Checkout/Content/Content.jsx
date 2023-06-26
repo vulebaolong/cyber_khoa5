@@ -1,13 +1,15 @@
-import style from "./Content.module.css";
+import Chair from "./Child/Chair";
+import CountDown from "./Child/CountDown";
+import Note from "./Child/Note";
+import Screen from "./Child/Screen";
 
 function Content() {
     return (
-        <div>
-            <div className={`${style.screen}`}>
-                <div className="flex justify-center items-center">
-                    <p className="text-center font-bold">Màn Hình</p>
-                </div>
-            </div>
+        <div className="px-40 mx-auto">
+            <CountDown />
+            <Screen />
+            <Chair />
+            <Note />
         </div>
     );
 }

@@ -7,15 +7,15 @@ const { Title } = Typography;
 
 function DetailTabs(props) {
     const { infoFilm } = props;
-    console.log(infoFilm.heThongRapChieu);
     const createText = (text, length) => {
         return text.length > length ? text.slice(0, length) + "..." : text;
     };
     const contentLichChieu = (phim) => {
         return phim.map((item, index) => {
+            console.log(item);
             const time = moment(item.ngayChieuGioChieu).format("hh:MM A");
             return (
-                <NavLink to={`/checkout/${123}`} key={index}>
+                <NavLink to={`/checkout/${item.maLichChieu}`} key={index}>
                     <Tag color="green" style={{ margin: 0 }}>
                         {time}
                     </Tag>
@@ -24,42 +24,45 @@ function DetailTabs(props) {
         });
     };
     const renderCumRap = (listCumRap) => {
-        return listCumRap.map((cumRap, index) => {
-            const arrTen = cumRap.tenCumRap.split("-");
-            const tenRap = arrTen[0].trim();
-            const tenCumRap = arrTen[1].trim();
-            const color = () => {
-                if (tenRap === "BHD Star Cineplex") return "#81ff81";
-                if (tenRap === "CGV") return "red";
-                if (tenRap === "CNS") return "#83fef4";
-                if (tenRap === "GLX") return "orange";
-                if (tenRap === "Lotte") return "#ff4c4c";
-                if (tenRap === "MegaGS") return "gold";
-            };
-            return (
-                <div className="space-y-3" key={index}>
-                    <div className="flex gap-2 ">
-                        <div className="flex w-14 items-center">
-                            <img className="w-full" src={cumRap.hinhAnh} />
+        return (
+            <div className="space-y-3">
+                {listCumRap.map((cumRap, index) => {
+                    const arrTen = cumRap.tenCumRap.split("-");
+                    const tenRap = arrTen[0].trim();
+                    const tenCumRap = arrTen[1].trim();
+                    const color = () => {
+                        if (tenRap === "BHD Star Cineplex") return "#81ff81";
+                        if (tenRap === "CGV") return "red";
+                        if (tenRap === "CNS") return "#83fef4";
+                        if (tenRap === "GLX") return "orange";
+                        if (tenRap === "Lotte") return "#ff4c4c";
+                        if (tenRap === "MegaGS") return "gold";
+                    };
+                    return (
+                        <div className="space-y-2" key={index}>
+                            <div className="flex gap-2">
+                                <div className="flex w-14 items-center">
+                                    <img className="w-full" src={cumRap.hinhAnh} />
+                                </div>
+                                <div className="text-start flex flex-col justify-center space-y-1">
+                                    <p className="m-0">
+                                        <span style={{ color: color() }}>{tenRap}</span>
+                                        <span> - {tenCumRap}</span>
+                                    </p>
+                                    <p className="m-0">{createText(cumRap.diaChi, 40)}</p>
+                                </div>
+                            </div>
+                            <div className="flex gap-2">
+                                <div className="w-16"></div>
+                                <div className="grid grid-cols-6 gap-4">
+                                    {contentLichChieu(cumRap.lichChieuPhim)}
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-start">
-                            <p className="m-0">
-                                <span style={{ color: color() }}>{tenRap}</span>
-                                <span> - {tenCumRap}</span>
-                            </p>
-                            <p className="m-0">{createText(cumRap.diaChi, 40)}</p>
-                            <p className="m-0">Chi Tiết</p>
-                        </div>
-                    </div>
-                    <div className="flex gap-2">
-                        <div className="w-16"></div>
-                        <div className="grid grid-cols-6 gap-4">
-                            {contentLichChieu(cumRap.lichChieuPhim)}
-                        </div>
-                    </div>
-                </div>
-            );
-        });
+                    );
+                })}
+            </div>
+        );
     };
     const renderRap = () => {
         return infoFilm.heThongRapChieu?.map((item, index) => {

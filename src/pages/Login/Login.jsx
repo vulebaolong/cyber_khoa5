@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { dangNhap } from "../../redux/actions/QuanLyNguoiDungAction";
+import { dangNhapAction } from "../../redux/slices/QuanLyNguoiDungSlice";
 
 function Login() {
     const dispatch = useDispatch();
@@ -15,13 +15,13 @@ function Login() {
     } = useForm({
         defaultValues: {
             taiKhoan: "vulebaolong",
-            matKhau: "123456",
+            matKhau: "123456789",
         },
     });
     // console.log(getValues());
     const onSubmit = (data) => {
         console.log("submit", data);
-        dispatch(dangNhap(data));
+        dispatch(dangNhapAction(data));
     };
     return (
         <div className="lg:w-1/2 xl:max-w-screen-sm">
