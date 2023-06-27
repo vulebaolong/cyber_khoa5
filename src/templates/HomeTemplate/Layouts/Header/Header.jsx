@@ -1,12 +1,19 @@
-import { Avatar, Popover, Typography } from "antd";
+import { Avatar, Popover, Typography, Select } from "antd";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+
+// Đa ngôn ngữ
+import { useTranslation } from "react-i18next";
 
 const { Text } = Typography;
 
 function Header() {
+    const { t, i18n } = useTranslation();
+    // i18n.init({
+    //     debug: false, // Tắt chế độ debug
+    //     // Các tùy chọn khác...
+    // });
     const { userLogin } = useSelector((state) => state.QuanLyNguoiDungSlice);
-    console.log(userLogin);
 
     const renderContentLogin = () => {
         return (
@@ -21,7 +28,7 @@ function Header() {
                         className="flex items-center gap-2 px-2 py-3 font-semibold text-xl rounded hover:bg-gray-500 w-full hover:text-slate-200 text-slate-200"
                     >
                         <div className=" flex items-center justify-center rounded-full bg-slate-600 w-10 h-10">
-                            <i class="fa-solid fa-right-from-bracket m-0"></i>
+                            <i className="fa-solid fa-right-from-bracket m-0"></i>
                         </div>
                         <span>Đăng xuất</span>
                     </NavLink>
@@ -30,7 +37,7 @@ function Header() {
         );
     };
     const renderLogin = () => {
-        if (!userLogin) {
+        if (Object.keys(userLogin).length === 0) {
             return (
                 <div className="flex">
                     <div className="items-center flex-shrink-0 hidden lg:flex">
@@ -39,11 +46,11 @@ function Header() {
                             className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent "
                         >
                             <button className="self-center px-8 py-3 rounded">
-                                Đăng nhập
+                                {t("Đăng nhập")}
                             </button>
                         </NavLink>
                         <button className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">
-                            Đăng ký
+                            {t("Đăng ký")}
                         </button>
                     </div>
                 </div>
@@ -53,7 +60,7 @@ function Header() {
             return (
                 <div className="flex items-center gap-2 ">
                     <Popover
-                        placement="topLeft"
+                        placement="bottomRight"
                         content={renderContentLogin()}
                         trigger="click"
                         className="cursor-pointer"
@@ -64,11 +71,14 @@ function Header() {
             );
         }
     };
+    const handleChange = (value) => {
+        i18n.changeLanguage(value);
+    };
     return (
         <header className="z-10 p-4 dark:bg-gray-800/75 dark:text-gray-100 fixed w-full">
             <div className=" flex justify-between h-16 ">
                 <NavLink
-                    to="/home"
+                    to="/"
                     rel="noopener noreferrer"
                     href="#"
                     aria-label="Back to homepage"
@@ -125,7 +135,20 @@ function Header() {
                         </a>
                     </li>
                 </ul>
-                {renderLogin()}
+                <div className="flex items-center gap-2">
+                    {renderLogin()}
+                    <Select
+                        defaultValue="vi"
+                        style={{ width: 120 }}
+                        onChange={handleChange}
+                        options={[
+                            { value: "en", label: "Eng" },
+                            { value: "chi", label: "Chi" },
+                            { value: "vi", label: "Vi" },
+                        ]}
+                    />
+                </div>
+
                 <button className="p-4 lg:hidden">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

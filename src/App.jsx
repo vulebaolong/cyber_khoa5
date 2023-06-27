@@ -11,6 +11,7 @@ import Detail from "./pages/Detail/Detail";
 import CheckoutTemplate from "./templates/CheckoutTemplate/CheckoutTemplate";
 import Checkout from "./pages/Checkout/Checkout";
 import UserTemplate from "./templates/UserTemplate/UserTemplate";
+import { useTranslation } from "react-i18next";
 
 export const history = createBrowserHistory();
 

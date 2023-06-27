@@ -5,6 +5,10 @@ import { STATE_CODE } from "../../Api/BaseApi";
 const initialState = {
     danhSachPhongVe: {},
     danhSachGheDangChon: [],
+    danhSachGheNguoiKhacChon: [{ maGhe: 69962 }, { maGhe: 69963 }],
+    thanhToan: "0",
+    isDatVe: false,
+    isModalOpen: false,
 };
 
 const QuanLyDatVeSlice = createSlice({
@@ -30,10 +34,32 @@ const QuanLyDatVeSlice = createSlice({
                 state.danhSachGheDangChon.push(ghe);
             }
         },
+        selectedThanhToan: (state, { type, payload }) => {
+            state.thanhToan = payload;
+        },
+        showHideModalDatVe: (state, { type, payload }) => {
+            if (payload === "show" && state.isDatVe) {
+                state.isModalOpen = true;
+                return;
+            }
+            if (payload === "hide") {
+                state.isModalOpen = false;
+                return;
+            }
+        },
+        setDatVe: (state, { type, payload }) => {
+            state.isDatVe = payload;
+        },
     },
 });
 
-export const { layDanhSachPhongVe, gheDangChon } = QuanLyDatVeSlice.actions;
+export const {
+    layDanhSachPhongVe,
+    gheDangChon,
+    selectedThanhToan,
+    showHideModalDatVe,
+    setDatVe,
+} = QuanLyDatVeSlice.actions;
 
 export default QuanLyDatVeSlice.reducer;
 
@@ -62,7 +88,9 @@ export const datVeAction = (requestData) => {
             console.log("datVe", { data, status });
             if (status !== STATE_CODE.SUCCESS) throw new Error(`status: ${status}`);
 
-            // dispatch(layDanhSachPhongVe(data.content));
+            await dispatch(layDanhSachPhongVeAction(requestData.maLichChieu));
+            await dispatch(setDatVe(true));
+            dispatch(showHideModalDatVe("show"));
         } catch (error) {
             console.log(error);
         }

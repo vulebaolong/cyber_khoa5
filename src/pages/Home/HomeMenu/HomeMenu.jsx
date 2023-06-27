@@ -23,7 +23,7 @@ function HomeMenu() {
             return phim.lstLichChieuTheoPhim.map((item, index) => {
                 const time = moment(item.ngayChieuGioChieu).format("hh:MM A");
                 return (
-                    <NavLink to="/" key={index}>
+                    <NavLink to={`/checkout/${item.maLichChieu}`} key={index}>
                         <Tag color="green" style={{ margin: 0 }}>
                             {time}
                         </Tag>
@@ -34,7 +34,7 @@ function HomeMenu() {
         const contentPhim = () =>
             danhSachPhim.map((phim, index) => {
                 return (
-                    <div key={index}>
+                    <div className="py-5" key={index}>
                         <div className="space-y-3">
                             <div className="flex gap-2">
                                 <div
@@ -55,12 +55,14 @@ function HomeMenu() {
                                 </div>
                             </div>
                         </div>
-                        {index !== limit ? <hr className="opacity-25" /> : ""}
                     </div>
                 );
             });
         return (
-            <div className="space-y-4 overflow-auto " style={{ height: "465px" }}>
+            <div
+                className=" overflow-auto divide-y divide-slate-400/25"
+                style={{ height: "465px" }}
+            >
                 {contentPhim()}
             </div>
         );

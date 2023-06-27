@@ -42,8 +42,12 @@
     @apply bg-green-500 cursor-pointer;
 }
 
-.gheDuocMua {
+.gheDuocMua,
+.gheDaMua {
     @apply bg-cyan-500 cursor-not-allowed;
+}
+
+.gheDaMua {
 }
 
 .gheDuocMua i {
