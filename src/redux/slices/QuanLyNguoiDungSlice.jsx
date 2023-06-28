@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { quanLyNguoiDungApi } from "../../Api/QuanLyNguoiDungApi";
-import { STATE_CODE, USER_LOGIN } from "../../Api/BaseApi";
+import { STATE_CODE, TOKEN, USER_LOGIN } from "../../Api/BaseApi";
 import { history } from "./../../App";
 
 const initialState = {
@@ -15,7 +15,6 @@ const QuanLyNguoiDungSlice = createSlice({
     reducers: {
         dangNhap: (state, { type, payload }) => {
             state.userLogin = payload;
-            localStorage.setItem(USER_LOGIN, JSON.stringify(payload));
         },
     },
 });
@@ -33,6 +32,9 @@ export const dangNhapAction = (requestData) => {
             const { data, status } = await quanLyNguoiDungApi.dangNhap(requestData);
             console.log("dangNhap", { data, status });
             if (status !== STATE_CODE.SUCCESS) throw new Error(`status: ${status}`);
+
+            localStorage.setItem(USER_LOGIN, JSON.stringify(data.content));
+            localStorage.setItem(TOKEN, JSON.stringify(data.content[TOKEN]));
 
             dispatch(dangNhap(data.content));
 

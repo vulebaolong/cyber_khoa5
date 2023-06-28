@@ -11,7 +11,10 @@ import Detail from "./pages/Detail/Detail";
 import CheckoutTemplate from "./templates/CheckoutTemplate/CheckoutTemplate";
 import Checkout from "./pages/Checkout/Checkout";
 import UserTemplate from "./templates/UserTemplate/UserTemplate";
-import { useTranslation } from "react-i18next";
+import Profile from "./pages/Profile/Profile";
+import Admin from "./pages/Admin/Admin";
+import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
+import TestAdmin from "./pages/Admin/TestAdmin";
 
 export const history = createBrowserHistory();
 
@@ -23,9 +26,16 @@ function App() {
                 <HomeTemplate path="/contact" exact Component={Contact} />
                 <HomeTemplate path="/news" exact Component={News} />
                 <HomeTemplate path="/detail/:id" exact Component={Detail} />
-                <UserTemplate path="/login" exact Component={Login} />
+                <HomeTemplate path="/profile" exact Component={Profile} />
+
                 <CheckoutTemplate path="/checkout/:id" exact Component={Checkout} />
-                <Route path="/register" exact Component={Register} />
+
+                <UserTemplate path="/login" exact Component={Login} />
+                <UserTemplate path="/register" exact Component={Register} />
+
+                <AdminTemplate path="/admin" exact Component={Admin} />
+                <AdminTemplate path="/admin/123" exact Component={TestAdmin} />
+
                 <HomeTemplate path="/" exact Component={Home} />
             </Switch>
         </Router>
@@ -37,7 +47,7 @@ export default App;
 
 // const CheckoutTemplateLazy = lazy(() =>
 //     import("./templates/CheckoutTemplate/CheckoutTemplate")
-// );
+// );import AdminTemplate from './templates/AdminTemplate/AdminTemplate';
 
 // <Suspense fallback={<div>LOADING...</div>}>
 // <CheckoutTemplateLazy

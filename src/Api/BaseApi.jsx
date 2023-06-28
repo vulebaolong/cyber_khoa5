@@ -29,7 +29,7 @@ export class BaseApi {
             url: `${DOMAIN}${url}`,
             method: "GET",
             headers: {
-                Authorization: `Bearer ${getUserLogin()}`,
+                Authorization: `Bearer ${JSON.parse(localStorage.getItem(TOKEN))}`,
                 TokenCybersoft: TOKEN_CYBER,
             },
         });
@@ -40,7 +40,7 @@ export class BaseApi {
             method: "PUT",
             data,
             headers: {
-                Authorization: `Bearer ${getUserLogin()}`,
+                Authorization: `Bearer ${JSON.parse(localStorage.getItem(TOKEN))}}`,
                 TokenCybersoft: TOKEN_CYBER,
             },
         });
@@ -51,7 +51,7 @@ export class BaseApi {
             method: "POST",
             data,
             headers: {
-                Authorization: `Bearer ${getUserLogin()}`,
+                Authorization: `Bearer ${JSON.parse(localStorage.getItem(TOKEN))}`,
                 TokenCybersoft: TOKEN_CYBER,
             },
         });
@@ -61,7 +61,7 @@ export class BaseApi {
             url: `${DOMAIN}${url}`,
             method: "DELETE",
             headers: {
-                Authorization: `Bearer ${getUserLogin()}`,
+                Authorization: `Bearer ${JSON.parse(localStorage.getItem(TOKEN))}`,
                 TokenCybersoft: TOKEN_CYBER,
             },
         });

@@ -1,6 +1,7 @@
 import { Avatar, Steps } from "antd";
 import { useSelector } from "react-redux";
-const description = "This is a description.";
+import ControlUser from "./../../../components/ControlUser/ControlUser";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 function Header() {
     const { userLogin } = useSelector((state) => state.QuanLyNguoiDungSlice);
     const { danhSachGheDangChon, thanhToan, isDatVe } = useSelector(
@@ -35,9 +36,16 @@ function Header() {
                     ]}
                 />
             </div>
-            <div className="flex flex-col gap-2 items-center">
-                <Avatar src={`https://picsum.photos/200`} size={40} />
-                <p>{userLogin.hoTen}</p>
+            <div className="flex items-center gap-2">
+                <ControlUser />
+
+                <NavLink
+                    activeClassName="dark:text-violet-400 dark:border-violet-400"
+                    to="/home"
+                    className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent "
+                >
+                    Home
+                </NavLink>
             </div>
         </div>
     );
