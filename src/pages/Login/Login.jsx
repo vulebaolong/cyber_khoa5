@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { dangNhapAction } from "../../redux/slices/QuanLyNguoiDungSlice";
+import { dangNhapActionMID } from "../../redux/slices/QuanLyNguoiDungSlice";
 
 function Login() {
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function Login() {
     // console.log(getValues());
     const onSubmit = (data) => {
         console.log("submit", data);
-        dispatch(dangNhapAction(data));
+        dispatch(dangNhapActionMID(data));
     };
     return (
         <div className="lg:w-1/2 xl:max-w-screen-sm">

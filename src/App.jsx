@@ -1,46 +1,65 @@
-import { Router, Switch, Route } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
-import { createBrowserHistory } from "history";
-import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
 import Home from "./pages/Home/Home";
+import HomeLayout from "./layouts/HomeLayout/HomeLayout";
+import UserLayout from "./layouts/UserLayout/UserLayout";
+import SignIn from "./pages/SignIn/SignIn";
+import Login from "./pages/Login/Login";
 import Contact from "./pages/Contact/Contact";
 import News from "./pages/News/News";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
 import Detail from "./pages/Detail/Detail";
-import CheckoutTemplate from "./templates/CheckoutTemplate/CheckoutTemplate";
-import Checkout from "./pages/Checkout/Checkout";
-import UserTemplate from "./templates/UserTemplate/UserTemplate";
 import Profile from "./pages/Profile/Profile";
-import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
-import TestAdmin from "./pages/Admin/TestAdmin";
-import AddFilm from "./pages/Admin/Films/AddFilm";
+import CheckoutLayout from "./layouts/CheckoutLayout/CheckoutLayout";
+import Checkout from "./pages/Checkout/Checkout";
+import AdminLayout from "./layouts/AdminLayout/AdminLayout";
 import AdminHome from "./pages/Admin/AdminHome";
 import ListFilm from "./pages/Admin/ListFilm/ListFilm";
-export const history = createBrowserHistory();
+import AddFilm from "./pages/Admin/Films/AddFilm";
+import EditFilm from "./pages/Admin/EditFilm/EditFilm";
+
+export const history = {
+    navigate: null,
+};
 
 function App() {
+    history.navigate = useNavigate();
     return (
-        <Router history={history}>
-            <Switch>
-                <HomeTemplate path="/home" exact Component={Home} />
-                <HomeTemplate path="/contact" exact Component={Contact} />
-                <HomeTemplate path="/news" exact Component={News} />
-                <HomeTemplate path="/detail/:id" exact Component={Detail} />
-                <HomeTemplate path="/profile" exact Component={Profile} />
+        <>
+            <Routes>
+                {/* HOME LAYOUT */}
+                <Route element={<HomeLayout />}>
+                    <Route index element={<Home />} />
+                    <Route path="home" element={<Home />} />
+                    <Route path="contact" element={<Contact />} />
+                    <Route path="news" element={<News />} />
+                    <Route path="detail/:id" element={<Detail />} />
+                    <Route path="profile" element={<Profile />} />
+                </Route>
 
-                <CheckoutTemplate path="/checkout/:id" exact Component={Checkout} />
+                {/* USER LAYOUT */}
+                <Route element={<UserLayout />}>
+                    <Route path="login" element={<Login />} />
+                    <Route path="signin" element={<SignIn />} />
+                </Route>
 
-                <UserTemplate path="/login" exact Component={Login} />
-                <UserTemplate path="/register" exact Component={Register} />
+                {/* CHECKOUT LAYOUT */}
+                <Route element={<CheckoutLayout />}>
+                    <Route path="checkout/:id" element={<Checkout />} />
+                </Route>
 
-                <AdminTemplate path="/admin" exact Component={AdminHome} />
-                <AdminTemplate path="/admin/film/listfilm" exact Component={ListFilm} />
-                <AdminTemplate path="/admin/film/addfilm" exact Component={AddFilm} />
+                {/* ADMIN LAYOUT */}
+                <Route path="admin" element={<AdminLayout />}>
+                    <Route index element={<AdminHome />} />
+                    <Route path="film/listfilm" element={<ListFilm />} />
+                    <Route path="film/addfilm" element={<AddFilm />} />
+                    <Route path="film/editfilm" element={<EditFilm />} />
+                    <Route path="film/editfilm/:id" element={<EditFilm />} />
+                </Route>
 
-                <HomeTemplate path="/" exact Component={Home} />
-            </Switch>
-        </Router>
+                {/* OTHER */}
+                <Route path="*" element={<Navigate to={"/"} />} />
+            </Routes>
+        </>
     );
 }
 

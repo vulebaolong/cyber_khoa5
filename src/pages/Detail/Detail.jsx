@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./Detail.module.css";
 import DetailBanner from "./DetailBanner/DetailBanner";
 import DetailTabs from "./DetailTabs/DetailTabs";
-import { layThongTinLichChieuAction } from "../../redux/slices/QuanLyRapSlice";
+import { layThongTinLichChieuMID } from "../../redux/slices/QuanLyRapSlice";
+import { useParams } from "react-router-dom";
 
 function Detail(props) {
-    const { id } = props.match.params;
+    const { id } = useParams();
     const dispatch = useDispatch();
     const { thongTinLichChieu: infoFilm } = useSelector((state) => state.QuanLyRapSlice);
     console.log(infoFilm);
     useEffect(() => {
-        dispatch(layThongTinLichChieuAction(id));
+        dispatch(layThongTinLichChieuMID(id));
     }, []);
 
     return (

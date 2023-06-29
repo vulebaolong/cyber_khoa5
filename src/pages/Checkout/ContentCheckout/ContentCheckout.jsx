@@ -3,7 +3,7 @@ import CountDown from "./Child/CountDown";
 import Note from "./Child/Note";
 import Screen from "./Child/Screen";
 
-function Content() {
+function ContentCheckout() {
     return (
         <div className="px-40 mx-auto">
             <CountDown />
@@ -13,4 +13,4 @@ function Content() {
         </div>
     );
 }
-export default Content;
+export default ContentCheckout;

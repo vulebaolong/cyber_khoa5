@@ -15,10 +15,10 @@ const QuanLyDatVeSlice = createSlice({
     name: "QuanLyDatVeSlice",
     initialState,
     reducers: {
-        layDanhSachPhongVe: (state, { type, payload }) => {
+        layDanhSachPhongVeREDU: (state, { type, payload }) => {
             state.danhSachPhongVe = payload;
         },
-        gheDangChon: (state, { type, payload }) => {
+        gheDangChonREDU: (state, { type, payload }) => {
             const ghe = payload;
             // nếu ghế đã được đặt thì return
             if (ghe.daDat) return;
@@ -34,10 +34,10 @@ const QuanLyDatVeSlice = createSlice({
                 state.danhSachGheDangChon.push(ghe);
             }
         },
-        selectedThanhToan: (state, { type, payload }) => {
+        selectedThanhToanREDU: (state, { type, payload }) => {
             state.thanhToan = payload;
         },
-        showHideModalDatVe: (state, { type, payload }) => {
+        showHideModalDatVeREDU: (state, { type, payload }) => {
             if (payload === "show" && state.isDatVe) {
                 state.isModalOpen = true;
                 return;
@@ -47,50 +47,51 @@ const QuanLyDatVeSlice = createSlice({
                 return;
             }
         },
-        setDatVe: (state, { type, payload }) => {
+        setDatVeREDU: (state, { type, payload }) => {
             state.isDatVe = payload;
         },
     },
 });
 
 export const {
-    layDanhSachPhongVe,
-    gheDangChon,
-    selectedThanhToan,
-    showHideModalDatVe,
-    setDatVe,
+    layDanhSachPhongVeREDU,
+    gheDangChonREDU,
+    selectedThanhToanREDU,
+    showHideModalDatVeREDU,
+    setDatVeREDU,
 } = QuanLyDatVeSlice.actions;
 
 export default QuanLyDatVeSlice.reducer;
 
 // -------------------action thunk ------------------
-// layDanhSachPhongVe
-export const layDanhSachPhongVeAction = (requestData) => {
+
+// layDanhSachPhongVeMID
+export const layDanhSachPhongVeMID = (requestData) => {
     return async (dispatch) => {
         try {
             const { data, status } = await quanLyDatVeApi.layChiTietPhongVe(requestData);
-            console.log("layDanhSachPhongVe", { data, status });
+            console.log("layDanhSachPhongVeMID", { data, status });
             if (status !== STATE_CODE.SUCCESS) throw new Error(`status: ${status}`);
 
-            dispatch(layDanhSachPhongVe(data.content));
+            dispatch(layDanhSachPhongVeREDU(data.content));
         } catch (error) {
             console.log(error);
         }
     };
 };
 
-// datVe
-export const datVeAction = (requestData) => {
+// datVeMID
+export const datVeMID = (requestData) => {
     return async (dispatch) => {
         try {
             console.log(requestData);
             const { data, status } = await quanLyDatVeApi.datVe(requestData);
-            console.log("datVe", { data, status });
+            console.log("datVeMID", { data, status });
             if (status !== STATE_CODE.SUCCESS) throw new Error(`status: ${status}`);
 
-            await dispatch(layDanhSachPhongVeAction(requestData.maLichChieu));
-            await dispatch(setDatVe(true));
-            dispatch(showHideModalDatVe("show"));
+            await dispatch(layDanhSachPhongVeMID(requestData.maLichChieu));
+            await dispatch(setDatVeREDU(true));
+            dispatch(showHideModalDatVeREDU("show"));
         } catch (error) {
             console.log(error);
         }

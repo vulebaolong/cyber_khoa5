@@ -1,22 +1,22 @@
-import Header from "./Header/Header";
-import Content from "./Content/Content";
 import Info from "./Info/Info";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { layDanhSachPhongVeAction } from "../../redux/slices/QuanLyDatVeSlice";
+import { useParams } from "react-router-dom";
+import { layDanhSachPhongVeMID } from "../../redux/slices/QuanLyDatVeSlice";
 import { useEffect } from "react";
+import HeaderCheckout from "./HeaderCheckout/HeaderCheckout";
+import ContentCheckout from "./ContentCheckout/ContentCheckout";
 
 function Checkout() {
     const dispatch = useDispatch();
     const { id } = useParams();
     useEffect(() => {
-        dispatch(layDanhSachPhongVeAction(id));
+        dispatch(layDanhSachPhongVeMID(id));
     }, []);
     return (
         <div className="grid grid-cols-12">
             <div className="col-start-1 col-span-9 space-y-10">
-                <Header />
-                <Content />
+                <HeaderCheckout />
+                <ContentCheckout />
             </div>
             <div className="col-start-10 col-span-3 ">
                 <Info />

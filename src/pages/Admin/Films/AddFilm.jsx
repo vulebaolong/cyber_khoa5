@@ -18,10 +18,8 @@ import {
 import moment from "moment";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addFilmAction, setImageUrl } from "../../../redux/slices/QuanLyPhimSlice";
 import { GROUP_ID } from "../../../Api/BaseApi";
 import _ from "lodash";
-const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 function AddFilm() {
@@ -45,7 +43,7 @@ function AddFilm() {
             }
         });
         // console.log(formData.get("File"));
-        // dispatch(addFilmAction(formData));
+        // dispatch(addFilmMID(formData));
     };
 
     const initialValues = {

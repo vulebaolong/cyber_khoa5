@@ -1,0 +1,7 @@
+.link {
+    @apply flex items-center px-4;
+}
+
+.link.linkActive {
+    @apply text-violet-400 border-violet-400 border-b-2;
+}

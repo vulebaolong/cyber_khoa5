@@ -3,13 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import Film from "../../../components/Film/Film";
 import Multipleitems from "../../../components/Rslick/Multipleitems";
 import { Radio } from "antd";
-import { getListFilmsAction } from "../../../redux/slices/QuanLyPhimSlice";
+import {
+    getAllFilmREDU,
+    getListFilmsMID,
+    getPhimDangChieuREDU,
+    getPhimSapChieuREDU,
+} from "../../../redux/slices/QuanLyPhimSlice";
 
 function HomeFilms() {
     const dispatch = useDispatch();
     const { listFilmsDisplay } = useSelector((state) => state.QuanLyPhimSlice);
     useEffect(() => {
-        dispatch(getListFilmsAction());
+        dispatch(getListFilmsMID());
     }, []);
 
     const renderFilms = () => {
@@ -20,13 +25,13 @@ function HomeFilms() {
 
     const handleOnchange = (e) => {
         if (e.target.value === "phimDangChieu") {
-            dispatch(getPhimDangChieuAction());
+            dispatch(getPhimDangChieuREDU());
         }
         if (e.target.value === "phimSapChieu") {
-            dispatch(getPhimSapChieuAction());
+            dispatch(getPhimSapChieuREDU());
         }
         if (e.target.value === "tatCaPhim") {
-            dispatch(getTatCaPhimAction());
+            dispatch(getAllFilmREDU());
         }
     };
 

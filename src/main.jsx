@@ -10,26 +10,10 @@ import { ConfigProvider, theme } from "antd";
 // React slick
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { DOMAIN } from "./Api/BaseApi.jsx";
-// import * as signalR from "@aspnet/signalr";
-
-// lắng nghe server
-// export const connection = new signalR.HubConnectionBuilder()
-//     .withUrl(`${DOMAIN}/DatVeHub`)
-//     .configureLogging(signalR.LogLevel.Information)
-//     .build();
-
-// connection
-//     .start()
-//     .then(() => {
-//         console.log("kết nối thành công");
-//     })
-//     .catch((error) => {
-//         console.log(error);
-//     });
 
 // Đa ngôn ngữ
 import "./i18n.js";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <ConfigProvider
@@ -38,7 +22,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         }}
     >
         <Provider store={store}>
-            <App />
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
         </Provider>
     </ConfigProvider>
 );

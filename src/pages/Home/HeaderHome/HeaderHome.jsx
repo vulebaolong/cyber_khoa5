@@ -1,30 +1,27 @@
 import { Avatar, Popover, Typography, Select } from "antd";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import style from "./HeaderHome.module.css";
 
 // Đa ngôn ngữ
 import { useTranslation } from "react-i18next";
 import _ from "lodash";
-import ControlUser from "./../../../../components/ControlUser/ControlUser";
+import ControlUser from "./../../../components/ControlUser/ControlUser";
 
 const { Text } = Typography;
 
-function Header() {
+function HeaderHome() {
     const { t, i18n } = useTranslation();
-
+    const createClassLink = ({ isActive }) => {
+        return isActive ? `${style.link} ${style.linkActive}` : `${style.link}`;
+    };
     const handleChange = (value) => {
         i18n.changeLanguage(value);
     };
     return (
         <header className="z-10 p-4 dark:bg-gray-800/75 dark:text-gray-100 fixed w-full ">
             <div className=" flex justify-between h-16 ">
-                <NavLink
-                    to="/"
-                    rel="noopener noreferrer"
-                    href="#"
-                    aria-label="Back to homepage"
-                    className="flex items-center p-2"
-                >
+                <NavLink to="/" className="flex items-center p-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -37,43 +34,24 @@ function Header() {
                 </NavLink>
                 <ul className="items-stretch hidden space-x-3 lg:flex m-0">
                     <li className="flex">
-                        <NavLink
-                            rel="noopener noreferrer"
-                            activeClassName="dark:text-violet-400 dark:border-violet-400"
-                            to="/home"
-                            className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent "
-                        >
+                        <NavLink to="/home" className={createClassLink}>
                             Home
                         </NavLink>
                     </li>
                     <li className="flex">
-                        <NavLink
-                            rel="noopener noreferrer"
-                            activeClassName="dark:text-violet-400 dark:border-violet-400"
-                            to="/contact"
-                            className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent "
-                        >
+                        <NavLink to="/" className={createClassLink}>
                             Contact
                         </NavLink>
                     </li>
                     <li className="flex">
-                        <NavLink
-                            rel="noopener noreferrer"
-                            activeClassName="dark:text-violet-400 dark:border-violet-400"
-                            to="/news"
-                            className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent "
-                        >
+                        <NavLink to="/news" className={createClassLink}>
                             News
                         </NavLink>
                     </li>
                     <li className="flex">
-                        <a
-                            rel="noopener noreferrer"
-                            href="#"
-                            className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
-                        >
-                            Link
-                        </a>
+                        <NavLink to="/news" className={createClassLink}>
+                            News
+                        </NavLink>
                     </li>
                 </ul>
                 <div className="flex items-center gap-2">
@@ -110,4 +88,4 @@ function Header() {
         </header>
     );
 }
-export default Header;
+export default HeaderHome;

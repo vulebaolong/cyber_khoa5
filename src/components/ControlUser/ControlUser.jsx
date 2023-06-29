@@ -1,11 +1,11 @@
 import { Avatar, Popover, Typography } from "antd";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-import { history } from "./../../App";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { TOKEN, USER_LOGIN } from "../../Api/BaseApi";
-import { dangNhap } from "../../redux/slices/QuanLyNguoiDungSlice";
+import { dangNhapREDU } from "../../redux/slices/QuanLyNguoiDungSlice";
+import { history } from "../../App";
 const { Text } = Typography;
 function ControlUser(props) {
     const dispatch = useDispatch();
@@ -15,8 +15,8 @@ function ControlUser(props) {
     const handleOnClick = () => {
         localStorage.removeItem(USER_LOGIN);
         localStorage.removeItem(TOKEN);
-        dispatch(dangNhap({}));
-        history.push("/");
+        dispatch(dangNhapREDU({}));
+        history.navigate("/");
         setOpen(false);
     };
     const handleOpenChange = (newOpen) => {
@@ -59,9 +59,11 @@ function ControlUser(props) {
                             {t("Đăng nhập")}
                         </button>
                     </NavLink>
-                    <button className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">
-                        {t("Đăng ký")}
-                    </button>
+                    <NavLink to="/signin">
+                        <button className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">
+                            {t("Đăng ký")}
+                        </button>
+                    </NavLink>
                 </div>
             </div>
         );

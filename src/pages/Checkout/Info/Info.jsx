@@ -4,10 +4,10 @@ import style from "./Info.module.css";
 import { useRef } from "react";
 import { DatVe } from "../../../class/DatVe";
 import {
-    datVeAction,
-    selectedThanhToan,
-    setDatVe,
-    showHideModalDatVe,
+    datVeMID,
+    selectedThanhToanREDU,
+    setDatVeREDU,
+    showHideModalDatVeREDU,
 } from "../../../redux/slices/QuanLyDatVeSlice";
 import { useState } from "react";
 import momoImg from "../../../assets/thanhtoan/momo.png";
@@ -41,10 +41,10 @@ function Info() {
     const { userLogin } = useSelector((state) => state.QuanLyNguoiDungSlice);
     const { thongTinPhim } = danhSachPhongVe;
     const handleOk = () => {
-        dispatch(showHideModalDatVe("hide"));
+        dispatch(showHideModalDatVeREDU("hide"));
     };
     const handleCancel = () => {
-        dispatch(showHideModalDatVe("hide"));
+        dispatch(showHideModalDatVeREDU("hide"));
     };
 
     const renderGia = () => {
@@ -89,7 +89,7 @@ function Info() {
         data.danhSachVe = danhSachGheDangChon;
         console.log(data);
         // showModal();
-        dispatch(datVeAction(data));
+        dispatch(datVeMID(data));
     };
 
     const renderThanhToan = () => {
@@ -134,7 +134,7 @@ function Info() {
 
     const onChange = (e) => {
         console.log("radio checked", e.target.value);
-        dispatch(selectedThanhToan(e.target.value));
+        dispatch(selectedThanhToanREDU(e.target.value));
     };
 
     const renderContentModal = () => {
@@ -143,7 +143,7 @@ function Info() {
 
     useEffect(() => {
         return () => {
-            dispatch(setDatVe(false));
+            dispatch(setDatVeREDU(false));
         };
     }, []);
 

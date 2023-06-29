@@ -3,12 +3,13 @@ import { Button, Form, Input, Popconfirm, Space, Table, Typography } from "antd"
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { useDispatch, useSelector } from "react-redux";
-import { getListFilmsAction } from "../../../redux/slices/QuanLyPhimSlice";
+import { getListFilmsMID } from "../../../redux/slices/QuanLyPhimSlice";
+import { history } from "./../../../App";
 
 function ListFilm() {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getListFilmsAction());
+        dispatch(getListFilmsMID());
     }, []);
     const { listFilms } = useSelector((state) => state.QuanLyPhimSlice);
 
@@ -177,7 +178,7 @@ function ListFilm() {
                             type="primary"
                             icon={<EditOutlined />}
                             onClick={() => {
-                                console.log("Chỉnh sửa");
+                                history.navigate(`/admin/film/editfilm/${record.maPhim}`);
                             }}
                         />
                         <Button

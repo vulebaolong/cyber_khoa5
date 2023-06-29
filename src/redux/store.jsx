@@ -17,6 +17,13 @@ import QuanLyPhimSlice from "./slices/QuanLyPhimSlice";
 import QuanLyRapSlice from "./slices/QuanLyRapSlice";
 import QuanLyDatVeSlice from "./slices/QuanLyDatVeSlice";
 import QuanLyNguoiDungSlice from "./slices/QuanLyNguoiDungSlice";
+import MenuAdminSlice from "./slices/MenuAdminSlice";
 export const store = configureStore({
-    reducer: { QuanLyPhimSlice, QuanLyRapSlice, QuanLyDatVeSlice, QuanLyNguoiDungSlice },
+    reducer: {
+        QuanLyPhimSlice,
+        QuanLyRapSlice,
+        QuanLyDatVeSlice,
+        QuanLyNguoiDungSlice,
+        MenuAdminSlice,
+    },
 });

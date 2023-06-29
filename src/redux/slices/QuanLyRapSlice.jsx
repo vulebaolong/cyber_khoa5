@@ -11,45 +11,45 @@ const QuanLyRapSlice = createSlice({
     name: "QuanLyRapSlice",
     initialState,
     reducers: {
-        getTheaterSystem: (state, { type, payload }) => {
+        getTheaterSystemREDU: (state, { type, payload }) => {
             state.theaterSystem = payload;
         },
-        layThongTinLichChieu: (state, { type, payload }) => {
+        layThongTinLichChieuREDU: (state, { type, payload }) => {
             state.thongTinLichChieu = payload;
         },
     },
 });
 
-export const { getTheaterSystem, layThongTinLichChieu } = QuanLyRapSlice.actions;
+export const { getTheaterSystemREDU, layThongTinLichChieuREDU } = QuanLyRapSlice.actions;
 
 export default QuanLyRapSlice.reducer;
 
 // -------------------action thunk ------------------
 
-//getTheaterSystem
-export const getTheaterSystemAction = (data) => {
+//getTheaterSystemMID
+export const getTheaterSystemMID = (data) => {
     return async (dispatch) => {
         try {
             const { data, status } = await quanLyRapApi.getTheaterSystem();
-            console.log("getTheaterSystem", { data, status });
+            console.log("getTheaterSystemMID", { data, status });
             if (status !== STATE_CODE.SUCCESS) throw new Error(`status: ${status}`);
 
-            dispatch(getTheaterSystem(data.content));
+            dispatch(getTheaterSystemREDU(data.content));
         } catch (error) {
             console.log(error);
         }
     };
 };
 
-//layThongTinLichChieu
-export const layThongTinLichChieuAction = (requestData) => {
+//layThongTinLichChieuMID
+export const layThongTinLichChieuMID = (requestData) => {
     return async (dispatch) => {
         try {
             const { data, status } = await quanLyRapApi.layThongTinLichChieu(requestData);
-            console.log("layThongTinLichChieu", { data, status });
+            console.log("layThongTinLichChieuMID", { data, status });
             if (status !== STATE_CODE.SUCCESS) throw new Error(`status: ${status}`);
 
-            dispatch(layThongTinLichChieu(data.content));
+            dispatch(layThongTinLichChieuREDU(data.content));
         } catch (error) {
             console.log(error);
         }

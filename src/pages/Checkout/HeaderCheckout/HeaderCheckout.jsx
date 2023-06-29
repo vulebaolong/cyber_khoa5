@@ -1,9 +1,11 @@
 import { Avatar, Steps } from "antd";
 import { useSelector } from "react-redux";
 import ControlUser from "./../../../components/ControlUser/ControlUser";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-function Header() {
-    const { userLogin } = useSelector((state) => state.QuanLyNguoiDungSlice);
+import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+function HeaderCheckout() {
+    const { t, i18n } = useTranslation();
+
     const { danhSachGheDangChon, thanhToan, isDatVe } = useSelector(
         (state) => state.QuanLyDatVeSlice
     );
@@ -13,6 +15,12 @@ function Header() {
         if (+thanhToan > 0) return 2;
         if (danhSachGheDangChon.length !== 0) return 1;
         return 0;
+    };
+
+    const createClassLink = ({ isActive }) => {
+        const linkActive = `dark:text-violet-400 dark:border-violet-400`;
+        const link = `flex items-center px-4 -mb-1 border-b-2 dark:border-transparent`;
+        return isActive ? `${link} ${linkActive}` : `${link}`;
     };
     return (
         <div
@@ -37,17 +45,13 @@ function Header() {
                 />
             </div>
             <div className="flex items-center gap-2">
-                <ControlUser />
+                <ControlUser t={t} />
 
-                <NavLink
-                    activeClassName="dark:text-violet-400 dark:border-violet-400"
-                    to="/home"
-                    className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent "
-                >
+                <NavLink to="/home" className={createClassLink}>
                     Home
                 </NavLink>
             </div>
         </div>
     );
 }
-export default Header;
+export default HeaderCheckout;

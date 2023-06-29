@@ -2,8 +2,8 @@ import { Carousel } from "antd";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-    getListBannerAction,
-    getListBanners,
+    getListBannerMID,
+    getListBannersREDU,
 } from "../../../redux/slices/QuanLyPhimSlice";
 
 const contentStyle = {
@@ -21,7 +21,7 @@ function HomeCarousel() {
     const dispatch = useDispatch();
     const { listBanners } = useSelector((state) => state.QuanLyPhimSlice);
     useEffect(() => {
-        dispatch(getListBannerAction());
+        dispatch(getListBannerMID());
     }, []);
 
     const renderCarousel = () => {

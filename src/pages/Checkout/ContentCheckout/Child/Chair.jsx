@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import Ghe from "../ItemChair.jsx/Ghe";
-import { gheDangChon } from "../../../../redux/slices/QuanLyDatVeSlice";
+import { gheDangChonREDU } from "../../../../redux/slices/QuanLyDatVeSlice";
 import { Avatar } from "antd";
 
 function Chair() {
@@ -17,7 +17,7 @@ function Chair() {
             const data = { ...ghe, tenGhe: `${letter}${ghe.tenGhe}` };
             const handleOnclick = () => {
                 console.log(data);
-                dispatch(gheDangChon(data));
+                dispatch(gheDangChonREDU(data));
             };
 
             // GHẾ BẠN MUA

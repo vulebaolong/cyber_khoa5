@@ -3,14 +3,14 @@ import { Radio, Space, Tabs, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getTheaterSystemAction } from "../../../redux/slices/QuanLyRapSlice";
+import { getTheaterSystemMID } from "../../../redux/slices/QuanLyRapSlice";
 
 function HomeMenu() {
     const dispatch = useDispatch();
     const { theaterSystem } = useSelector((state) => state.QuanLyRapSlice);
 
     useEffect(() => {
-        dispatch(getTheaterSystemAction());
+        dispatch(getTheaterSystemMID());
     }, []);
 
     const createText = (text, length) => {
