@@ -27,3 +27,7 @@
 body {
     @apply antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900;
 }
+
+:where(.css-dev-only-do-not-override-ttralc).ant-switch {
+    background: rgba(255, 255, 255, 0.25);
+}

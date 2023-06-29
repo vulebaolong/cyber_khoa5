@@ -1,9 +1,15 @@
 import { Route, Redirect } from "react-router-dom";
 import { USER_LOGIN } from "../../Api/BaseApi";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
+    AppstoreOutlined,
+    ContainerOutlined,
+    DesktopOutlined,
+    MailOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
+    PieChartOutlined,
     UploadOutlined,
     UserOutlined,
     VideoCameraOutlined,
@@ -15,7 +21,38 @@ import { Footer } from "antd/es/layout/layout";
 import { history } from "../../App";
 const { Header, Sider, Content } = Layout;
 
+function getItem(label, key, icon, children, type) {
+    return {
+        key,
+        icon,
+        children,
+        label,
+        type,
+    };
+}
+const items = [
+    getItem("Quản lý phim", "/admin/film", <MailOutlined />, [
+        getItem("Danh sách phim", "/admin/film/listfilm"),
+        getItem("Thêm phim", "/admin/film/addfilm"),
+    ]),
+    getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
+        getItem("Option 9", "9"),
+        getItem("Option 10", "10"),
+        getItem("Submenu", "sub3", null, [
+            getItem("Option 11", "11"),
+            getItem("Option 12", "12"),
+        ]),
+    ]),
+    getItem("Option 14", "14", <PieChartOutlined />),
+];
+
 function AdminTemplate(props) {
+    const location = useLocation();
+    const defaultSelectedKeys = location.pathname;
+    const defaultOpenKeys = () => {
+        const item = location.pathname.split("/");
+        return `/${item[1]}/${item[2]}`;
+    };
     const { Component, ...restProps } = props;
     if (!localStorage.getItem(USER_LOGIN)) {
         return <Redirect to="/login" />;
@@ -29,9 +66,7 @@ function AdminTemplate(props) {
         token: { colorBgContainer },
     } = theme.useToken();
     const onClick = (e) => {
-        console.log(e);
-        if (e.key === "1") history.push("/admin");
-        if (e.key === "2") history.push("/admin/123");
+        history.push(e.key);
     };
     return (
         <Route
@@ -58,27 +93,12 @@ function AdminTemplate(props) {
                                 </svg>
                             </NavLink>
                             <Menu
+                                defaultSelectedKeys={[defaultSelectedKeys]}
+                                defaultOpenKeys={[defaultOpenKeys()]}
                                 onSelect={onClick}
                                 theme="dark"
                                 mode="inline"
-                                defaultSelectedKeys={["1"]}
-                                items={[
-                                    {
-                                        key: "1",
-                                        icon: <UserOutlined />,
-                                        label: "Thông tin",
-                                    },
-                                    {
-                                        key: "2",
-                                        icon: <VideoCameraOutlined />,
-                                        label: "TEST",
-                                    },
-                                    {
-                                        key: "3",
-                                        icon: <UploadOutlined />,
-                                        label: "nav 3",
-                                    },
-                                ]}
+                                items={items}
                             />
                         </Sider>
                         <Layout>

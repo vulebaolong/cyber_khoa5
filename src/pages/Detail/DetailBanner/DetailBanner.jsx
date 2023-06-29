@@ -38,9 +38,9 @@ function DetailBanner(props) {
                         <Progress
                             strokeColor={"#7ed321"}
                             type="circle"
-                            percent={+infoFilm.danhGia * 10}
+                            percent={(+infoFilm.danhGia / 5) * 100}
                         />
-                        <Rate allowHalf value={+infoFilm.danhGia / 2} />
+                        <Rate allowHalf value={+infoFilm.danhGia} />
                     </div>
                 </div>
             </div>

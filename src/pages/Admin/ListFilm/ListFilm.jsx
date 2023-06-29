@@ -3,64 +3,9 @@ import { Button, Form, Input, Popconfirm, Space, Table, Typography } from "antd"
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { useDispatch, useSelector } from "react-redux";
-import { getListFilmsAction } from "../../redux/slices/QuanLyPhimSlice";
-const data = [
-    {
-        name: "John Brown",
-        age: 32,
-        address: "New York No. 1 Lake Park",
-    },
-    {
-        name: "Joe Brown",
-        age: 42,
-        address: "London No. 1 Lake Park",
-    },
-    {
-        name: "Jim Green",
-        age: 35,
-        address: "Sydney No. 1 Lake Park",
-    },
-    {
-        name: "Jim Red",
-        age: 36,
-        address: "London No. 2 Lake Park",
-    },
-];
-const EditableCell = ({
-    editing,
-    dataIndex,
-    title,
-    inputType,
-    record,
-    index,
-    children,
-    ...restProps
-}) => {
-    const inputNode = inputType === "number" ? <InputNumber /> : <Input />;
-    return (
-        <td {...restProps}>
-            {editing ? (
-                <Form.Item
-                    name={dataIndex}
-                    style={{
-                        margin: 0,
-                    }}
-                    rules={[
-                        {
-                            required: true,
-                            message: `Please Input ${title}!`,
-                        },
-                    ]}
-                >
-                    {inputNode}
-                </Form.Item>
-            ) : (
-                children
-            )}
-        </td>
-    );
-};
-function Admin() {
+import { getListFilmsAction } from "../../../redux/slices/QuanLyPhimSlice";
+
+function ListFilm() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getListFilmsAction());
@@ -182,35 +127,7 @@ function Admin() {
                 text
             ),
     });
-    //==================================================
-    const [form] = Form.useForm();
-    const [editingKey, setEditingKey] = useState("");
-    const save = async (key) => {
-        try {
-            const row = await form.validateFields();
-            console.log(row);
-            setEditingKey("");
-        } catch (errInfo) {
-            console.log("Validate Failed:", errInfo);
-        }
-    };
-    const cancel = () => {
-        setEditingKey("");
-    };
-    const isEditing = (record) => {
-        return `${record.maPhim}` === editingKey;
-    };
-    const edit = (record) => {
-        form.setFieldsValue({
-            maPhim: "",
-            hinhAnh: "",
-            tenPhim: "",
-            moTa: "",
 
-            ...record,
-        });
-        setEditingKey(`${record.maPhim}`);
-    };
     const columns = [
         {
             title: "Mã phim",
@@ -227,7 +144,11 @@ function Admin() {
                 // console.log(text, record, index);
                 return (
                     <div className="w-20 h-20">
-                        <img className="w-full h-full" src={text.hinhAnh} alt="" />
+                        <img
+                            className="w-full h-full object-contain"
+                            src={text.hinhAnh}
+                            alt=""
+                        />
                     </div>
                 );
             },
@@ -250,33 +171,18 @@ function Admin() {
             title: "Action",
             width: 100,
             render: (_, record) => {
-                const editable = isEditing(record);
-                return editable ? (
-                    <span>
-                        <Typography.Link
-                            onClick={() => save(record.key)}
-                            style={{
-                                marginRight: 8,
-                            }}
-                        >
-                            Save
-                        </Typography.Link>
-                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                            <a>Cancel</a>
-                        </Popconfirm>
-                    </span>
-                ) : (
+                return (
                     <div className="flex gap-2">
                         <Button
                             type="primary"
                             icon={<EditOutlined />}
-                            disabled={editingKey !== ""}
-                            onClick={() => edit(record)}
+                            onClick={() => {
+                                console.log("Chỉnh sửa");
+                            }}
                         />
                         <Button
                             danger
                             icon={<DeleteOutlined />}
-                            disabled={editingKey !== ""}
                             onClick={() => {
                                 console.log("xoá");
                             }}
@@ -286,39 +192,17 @@ function Admin() {
             },
         },
     ];
-    const mergedColumns = columns.map((col) => {
-        if (!col.editable) {
-            return col;
-        }
-        return {
-            ...col,
-            onCell: (record) => ({
-                record,
-                inputType: col.dataIndex === "age" ? "number" : "text",
-                dataIndex: col.dataIndex,
-                title: col.title,
-                editing: isEditing(record),
-            }),
-        };
-    });
+
     return (
-        <Form form={form} component={false}>
+        <Form>
             <Table
-                components={{
-                    body: {
-                        cell: EditableCell,
-                    },
-                }}
                 rowKey={"maPhim"}
                 rowClassName="editable-row"
                 theme={"dark"}
-                columns={mergedColumns}
+                columns={columns}
                 dataSource={listFilms}
-                pagination={{
-                    onChange: cancel,
-                }}
             />
         </Form>
     );
 }
-export default Admin;
+export default ListFilm;
