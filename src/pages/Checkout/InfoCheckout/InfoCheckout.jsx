@@ -19,7 +19,7 @@ import { useEffect } from "react";
 
 const { Text } = Typography;
 
-function Info() {
+function InfoCheckout() {
     const [api, contextHolder] = notification.useNotification();
     const openNotification = (
         type = "success",
@@ -261,4 +261,4 @@ function Info() {
         </>
     );
 }
-export default Info;
+export default InfoCheckout;

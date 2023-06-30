@@ -1,8 +1,8 @@
+import "./index.css";
 import ReactDOM from "react-dom/client";
 // antd
-import "antd/dist/reset.css";
 import App from "./App.jsx";
-import "./index.css";
+import "antd/dist/reset.css";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.jsx";
 import { ConfigProvider, theme } from "antd";

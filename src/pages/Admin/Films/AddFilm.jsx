@@ -20,6 +20,7 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GROUP_ID } from "../../../Api/BaseApi";
 import _ from "lodash";
+import { addFilmMID } from "../../../redux/slices/QuanLyPhimSlice";
 const { TextArea } = Input;
 
 function AddFilm() {
@@ -27,7 +28,7 @@ function AddFilm() {
     const [imageUrl, setImageUrl] = useState();
     const [loading, setLoading] = useState(false);
     const onFinish = (values) => {
-        values.ngayMoiChieu = moment(values.ngayMoiChieu.$d).format("DD/MM/YYYY");
+        values.ngayKhoiChieu = moment(values.ngayKhoiChieu.$d).format("DD/MM/YYYY");
         values.maNhom = GROUP_ID;
         console.log("Success:", values);
 
@@ -42,15 +43,15 @@ function AddFilm() {
                 formData.append("File", values.hinhAnh, values.name);
             }
         });
-        // console.log(formData.get("File"));
-        // dispatch(addFilmMID(formData));
+        console.log(formData.get("File"));
+        dispatch(addFilmMID(formData));
     };
 
     const initialValues = {
         tenPhim: "",
         trailer: "",
         moTa: "",
-        ngayMoiChieu: "",
+        ngayKhoiChieu: "",
         dangChieu: false,
         sapChieu: false,
         hot: false,
@@ -105,7 +106,7 @@ function AddFilm() {
                 <Form.Item label="Mô tả" name="moTa">
                     <TextArea rows={4} />
                 </Form.Item>
-                <Form.Item label="Ngày mới chiếu" name="ngayMoiChieu">
+                <Form.Item label="Ngày khởi chiếu" name="ngayKhoiChieu">
                     <DatePicker format={"DD/MM/YYYY"} />
                 </Form.Item>
                 <Form.Item label="Đang chiếu" name="dangChieu" valuePropName="checked">

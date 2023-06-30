@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     selectedKeys: "",
-    openKeys: "",
 };
 
 const MenuAdminSlice = createSlice({
@@ -11,7 +10,6 @@ const MenuAdminSlice = createSlice({
     reducers: {
         setKeyREDU: (state, { type, payload }) => {
             state.selectedKeys = payload.selectedKeys;
-            state.openKeys = payload.openKeys;
         },
     },
 });

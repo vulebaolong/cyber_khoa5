@@ -31,3 +31,6 @@ body {
 :where(.css-dev-only-do-not-override-ttralc).ant-switch {
     background: rgba(255, 255, 255, 0.25);
 }
+[type="submit"] {
+    background-color: #1668dc;
+}

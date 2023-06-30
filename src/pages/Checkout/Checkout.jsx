@@ -1,10 +1,10 @@
-import Info from "./Info/Info";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { layDanhSachPhongVeMID } from "../../redux/slices/QuanLyDatVeSlice";
 import { useEffect } from "react";
 import HeaderCheckout from "./HeaderCheckout/HeaderCheckout";
 import ContentCheckout from "./ContentCheckout/ContentCheckout";
+import InfoCheckout from "./InfoCheckout/InfoCheckout";
 
 function Checkout() {
     const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function Checkout() {
                 <ContentCheckout />
             </div>
             <div className="col-start-10 col-span-3 ">
-                <Info />
+                <InfoCheckout />
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 import { BaseApi, GROUP_ID } from "./BaseApi";
-class QuanLyPhim extends BaseApi {
+class QuanLyPhimApi extends BaseApi {
     getListBanner = () => {
         return this.get(`/QuanLyPhim/LayDanhSachBanner`);
     };
@@ -12,6 +12,12 @@ class QuanLyPhim extends BaseApi {
     addFilm = (data) => {
         return this.post(data, `/QuanLyPhim/ThemPhimUploadHinh`);
     };
+    getInfoFilm = (data) => {
+        return this.get(`/QuanLyPhim/LayThongTinPhim?MaPhim=${data}`);
+    };
+    editFilm = (data) => {
+        return this.post(data, `/QuanLyPhim/CapNhatPhimUpload`);
+    };
 }
 
-export const quanLyPhim = new QuanLyPhim();
+export const quanLyPhimApi = new QuanLyPhimApi();

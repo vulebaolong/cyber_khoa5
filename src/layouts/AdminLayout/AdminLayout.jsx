@@ -59,7 +59,7 @@ function AdminLayout() {
         return `/${item[1]}/${item[2]}`;
     };
 
-    const { selectedKeys, openKeys } = useSelector((state) => state.MenuAdminSlice);
+    const { selectedKeys } = useSelector((state) => state.MenuAdminSlice);
 
     useEffect(() => {
         if (!localStorage.getItem(USER_LOGIN)) {
@@ -75,12 +75,11 @@ function AdminLayout() {
         token: { colorBgContainer },
     } = theme.useToken();
     const onClick = (e) => {
-        console.log(e.keyPath);
         const selectedKeys = e.keyPath[0];
-        const openKeys = e.keyPath[1];
-        dispatch(setKeyREDU({ selectedKeys, openKeys }));
+        dispatch(setKeyREDU({ selectedKeys }));
         history.navigate(e.key);
     };
+
     const createClassLink = ({ isActive }) => {
         const linkActive = `dark:text-violet-400 dark:border-violet-400`;
         const link = `flex items-center px-4 -mb-1 border-b-2 dark:border-transparent`;
@@ -110,7 +109,6 @@ function AdminLayout() {
                     defaultSelectedKeys={[defaultSelectedKeys]}
                     defaultOpenKeys={[defaultOpenKeys()]}
                     selectedKeys={selectedKeys}
-                    openKeys={openKeys}
                     onSelect={onClick}
                     theme="dark"
                     mode="inline"

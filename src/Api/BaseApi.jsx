@@ -10,7 +10,7 @@
 
 import axios from "axios";
 
-export const DOMAIN = "https://movienew.cybersoft.edu.vn/api";
+export const DOMAIN = "https://movieapi.cyberlearn.vn/api";
 export const TOKEN = "accessToken";
 export const USER_LOGIN = "USER_LOGIN";
 export const STATE_CODE = { SUCCESS: 200 };

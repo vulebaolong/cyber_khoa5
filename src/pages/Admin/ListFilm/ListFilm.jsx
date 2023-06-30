@@ -135,7 +135,7 @@ function ListFilm() {
             dataIndex: "maPhim",
             width: 125,
             ...getColumnSearchProps("maPhim"),
-            sorter: (a, b) => a.moTa.length - b.moTa.length,
+            sorter: (item2, item1) => item2.maPhim - item1.maPhim,
             sortDirections: ["descend", "ascend"],
             editable: true,
         },

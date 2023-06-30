@@ -1,10 +1,7 @@
 import { Carousel } from "antd";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    getListBannerMID,
-    getListBannersREDU,
-} from "../../../redux/slices/QuanLyPhimSlice";
+import { getListBannerMID } from "../../../redux/slices/QuanLyPhimSlice";
 
 const contentStyle = {
     height: "80vh",

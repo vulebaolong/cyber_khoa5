@@ -1,0 +1,9 @@
+.upload > div {
+    width: 204px !important;
+    height: auto !important;
+    padding: 0.5rem;
+}
+
+.upload > div > span {
+    justify-content: space-between !important;
+}
