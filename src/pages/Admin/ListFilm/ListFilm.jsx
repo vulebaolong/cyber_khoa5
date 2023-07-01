@@ -3,7 +3,7 @@ import { Button, Form, Input, Popconfirm, Space, Table, Typography } from "antd"
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { useDispatch, useSelector } from "react-redux";
-import { getListFilmsMID } from "../../../redux/slices/QuanLyPhimSlice";
+import { deleteFilmMID, getListFilmsMID } from "../../../redux/slices/QuanLyPhimSlice";
 import { history } from "./../../../App";
 
 function ListFilm() {
@@ -185,7 +185,8 @@ function ListFilm() {
                             danger
                             icon={<DeleteOutlined />}
                             onClick={() => {
-                                console.log("xoá");
+                                dispatch(deleteFilmMID(record.maPhim));
+                                console.log(record.maPhim);
                             }}
                         />
                     </div>
@@ -198,7 +199,6 @@ function ListFilm() {
         <Form>
             <Table
                 rowKey={"maPhim"}
-                rowClassName="editable-row"
                 theme={"dark"}
                 columns={columns}
                 dataSource={listFilms}

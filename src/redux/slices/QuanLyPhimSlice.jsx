@@ -149,3 +149,19 @@ export const editFilmMID = (requestData) => {
         }
     };
 };
+
+//deleteFilmMID
+export const deleteFilmMID = (requestData) => {
+    return async (dispatch) => {
+        try {
+            const { data, status } = await quanLyPhimApi.deleteFilm(requestData);
+            console.log("deleteFilmMID - MID", { data, status });
+            if (status !== STATE_CODE.SUCCESS) throw new Error(`status: ${status}`);
+
+            // truyền dữ liệu lên reducer
+            // dispatch(getInfoFilmREDU(data.content));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+};

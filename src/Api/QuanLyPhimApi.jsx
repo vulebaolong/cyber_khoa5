@@ -18,6 +18,9 @@ class QuanLyPhimApi extends BaseApi {
     editFilm = (data) => {
         return this.post(data, `/QuanLyPhim/CapNhatPhimUpload`);
     };
+    deleteFilm = (data) => {
+        return this.delete(`/QuanLyPhim/XoaPhim?MaPhim=${data}`);
+    };
 }
 
 export const quanLyPhimApi = new QuanLyPhimApi();

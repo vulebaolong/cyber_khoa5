@@ -34,3 +34,10 @@ body {
 [type="submit"] {
     background-color: #1668dc;
 }
+
+.ant-table-row ant-table-row-level-0 {
+    display: flex;
+}
+.ant-table-cell {
+    word-break: break-all;
+}
